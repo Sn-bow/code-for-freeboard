@@ -14,36 +14,40 @@ const EmotionSection = () => {
 
     const userStateHandler = e => {
         setUser(e.target.value)
+        if (e.target.value) setUserError("")
     }
 
     const passwordStateHandler = e => {
         setPassword(e.target.value)
+        if (e.target.value) setPasswordError("")
     }
 
     const titleStateHandler = e => {
         setTitle(e.target.value)
+        if (e.target.value) setTitleError("")
     }
 
     const contentStateHandler = e => {
         setContent(e.target.value)
+        if (e.target.value) setContentError("")
     }
 
     const signUpHandler = () => {
-        if (user.length > 0 && password.length > 0 && title > 0 && content > 0) {
+        if (user && password && title && content) {
             alert("작성성공")
         }
-        if (user.length === 0) {
+        if (!user) {
             setUserError("적어주세요")
-        } else setUserError("")
-        if (password.length === 0) {
+        }
+        if (!password) {
             setPasswordError("적어주세요")
-        } else setPasswordError("")
-        if (title.length === 0) {
+        }
+        if (!title) {
             setTitleError("적어주세요")
-        } else setTitleError("")
-        if (content.length === 0) {
+        }
+        if (!content) {
             setContentError("적어주세요")
-        } else setContentError("")
+        }
     }
 
 
