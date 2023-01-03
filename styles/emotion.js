@@ -28,6 +28,7 @@ export const Hown = styled.h1`
 
 export const UserBox = styled.div`
     display: flex;
+    height:128px;
 `;
 
 export const IdFlexStyledBox = styled.div`
@@ -51,9 +52,10 @@ export const UserInformationLabel = styled.label`
 `;
 
 export const UserInformationInput = styled.input`
-    width: 486px;
-    height: 52px;
+    width: 476px;
+    height: 42px;
     border: 1px solid #BDBDBD;
+    padding: 10px;
     border-radius: 5px;
 `
 
@@ -71,9 +73,10 @@ export const TitleLabel = styled.label`
 `
 
 export const TitleInput = styled.input`
-    width: 996px;
-    height: 52px;
+    width: 986px;
+    height: 42px;
     border: 1px solid #BDBDBD;
+    padding: 10px;
     border-radius: 5px;
 `
 
@@ -91,10 +94,11 @@ export const ContentLabel = styled.label`
 `
 
 export const ContentInput = styled.textarea`
-    width: 996px;
-    height: 480px;
+    width: 986px;
+    height: 470px;
     border: 1px solid #BDBDBD;
     border-radius: 5px;
+    padding: 10px;
     resize: none;
 `
 
@@ -134,8 +138,9 @@ export const AddressButton = styled.button`
 `
 
 export const AddressConsole = styled.input`
-    width: 996px;
-    height: 52px;
+    width: 986px;
+    height: 42px;
+    padding: 10px;
     margin-bottom: 16px;
 `
 
@@ -153,9 +158,10 @@ export const YoutubeLabel = styled.label`
 `
 
 export const YoutubeInput = styled.input`
-    width: 996px;
-    height: 52px;
+    width: 986px;
+    height: 42px;
     border: 1px solid #BDBDBD;
+    padding: 10px;
     border-radius: 5px;
 `
 
@@ -245,4 +251,9 @@ export const EmendButton = styled.button`
     background: #FFD600;
     color: black;
     text-align: center;
+`
+
+export const ErrorMessage = styled.div`
+    margin-top: 10px;
+    color: red;
 `
