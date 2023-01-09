@@ -1,33 +1,6 @@
-import { ProductDetailStyled } from '../../../styles/emotion'
-import { gql, useQuery } from '@apollo/client'
-import { useRouter } from 'next/router'
+import { ProductDetailStyled } from './BoardDetail.style'
 
-const FETCH_BOARD = gql`
-query fetchBoard($boardId: ID!){
-    fetchBoard(boardId: $boardId){
-      _id
-      writer
-      title
-      contents
-      likeCount
-      dislikeCount
-      images
-    }
-  }
-`
-// 63b96f951182750028ed0b24 -> test 용 _id
-
-const ProductDetailPage = () => {
-    const router = useRouter()
-
-    const { data } = useQuery(FETCH_BOARD, {
-        variables: {
-            boardId: router.query.id
-        }
-    })
-
-    console.log(data)
-
+const BoardDetailUI = ({ data }) => {
     return (
         <>
             <MainContain>
@@ -82,8 +55,7 @@ const ProductDetailPage = () => {
     )
 }
 
-export default ProductDetailPage;
-
+export default BoardDetailUI;
 
 const {
     MainContain, MainBox, UserBox, ContentsBox, LikeAndUnLikeBox, UserBoxContents, UserImage,
