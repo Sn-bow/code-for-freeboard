@@ -1,6 +1,6 @@
 import { ProductDetailStyled } from './BoardDetail.style'
 
-const BoardDetailUI = ({ data }) => {
+const BoardDetailUI = ({ data, deleteClickHandler }) => {
     return (
         <>
             <MainContain>
@@ -48,7 +48,7 @@ const BoardDetailUI = ({ data }) => {
                 <ButtonBox>
                     <ListMoveButton>목록으로</ListMoveButton>
                     <AmendMoveButton>수정하기</AmendMoveButton>
-                    <DeleteMoveButton>삭제하기</DeleteMoveButton>
+                    <DeleteMoveButton id={data && data.fetchBoard._id} onClick={deleteClickHandler}>삭제하기</DeleteMoveButton>
                 </ButtonBox>
             </MainContain>
         </>

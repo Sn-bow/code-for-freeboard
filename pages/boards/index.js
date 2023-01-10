@@ -1,10 +1,5 @@
-// 목록보기 페이지가 될 페이지 컴포넌트
+import BoardList from '../../src/components/units/board/list/BoardList.container'
 
-const BoardListPage = () => {
-    return (
-        <>
-        </>
-    )
+export default function BoardsPage() {
+    return <BoardList />
 }
-
-export default BoardListPage
