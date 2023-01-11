@@ -3,7 +3,7 @@ import BoardCreate from '../../../src/components/units/board/create/BoardCreate.
 const EmotionSection = () => {
 
     return (
-        <BoardCreate />
+        <BoardCreate isEdit={true} />
     )
 }
 

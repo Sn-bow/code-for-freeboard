@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useRouter } from 'next/router'
-import { useMutation } from '@apollo/client'
-import CREATE_BOARD from './BoardCreate.mutation'
+import { useMutation, useQuery } from '@apollo/client'
+import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from './BoardCreate.mutation'
 import BoardCreateUI from './BoardCreate.presenter'
 
-const BoardCreate = () => {
+const BoardCreate = ({ isEdit }) => {
     // change state
     const [boardValueState, setBoardValueState] = useState({
         user: '',
@@ -13,7 +13,6 @@ const BoardCreate = () => {
         content: '',
     })
     const { user, password, title, content } = boardValueState
-    console.log(user)
 
     // error state
     const [userError, setUserError] = useState('')
@@ -23,7 +22,15 @@ const BoardCreate = () => {
 
     // mutation & router
     const [board] = useMutation(CREATE_BOARD)
+    const [updateBoard] = useMutation(UPDATE_BOARD)
     const router = useRouter()
+
+    // query
+    const { data } = useQuery(FETCH_BOARD, {
+        variables: {
+            boardId: router.query.id
+        }
+    })
 
     // changeHandler & errorHandler
     const boardStateChangeHandler = (e) => {
@@ -82,6 +89,48 @@ const BoardCreate = () => {
         }
     }
 
+    // onClickUpdate Handler
+    const onClickUpdate = async () => {
+        if (user && password && title && content) {
+            try {
+                const update = await updateBoard({
+                    variables: {
+                        updateBoardInput: {
+                            title: title,
+                            contents: content
+                        },
+                        password: password,
+                        boardId: router.query.id
+                    }
+                })
+                alert("수정에 성공하셨습니다.")
+                router.push(`/boards/detail/${update.data.updateBoard._id}`)
+            } catch (error) {
+                console.log(error)
+                console.error(error)
+                alert(error)
+            }
+        }
+        // error 실행 조건문
+        if (!user) {
+            setUserError("작성자를 적어주세요!")
+        }
+        if (!password) {
+            setPasswordError("패스워드를 적어주세요!")
+        }
+        if (!title) {
+            setTitleError("제목을 적어주세요!")
+        }
+        if (!content) {
+            setContentError("내용을 적어주세요!")
+        }
+    }
+
+    // 취소하기 버튼
+    const cancleHandler = () => {
+        router.push(`/boards/detail/${router.query.id}`)
+    }
+
     return (
         <BoardCreateUI
             boardStateChangeHandler={boardStateChangeHandler}
@@ -94,6 +143,10 @@ const BoardCreate = () => {
             password={password}
             title={title}
             content={content}
+            onClickUpdate={onClickUpdate}
+            isEdit={isEdit}
+            cancleHandler={cancleHandler}
+            data={data}
         />
     )
 }

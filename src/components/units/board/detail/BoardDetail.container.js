@@ -23,6 +23,7 @@ const BoardDetail = () => {
                 }
             })
             alert("성공적으로 삭제 되었습니다.")
+            router.push(`/boards`)
         } catch (error) {
             console.error(error.message)
             console.log(error.message)
@@ -31,8 +32,23 @@ const BoardDetail = () => {
 
     }
 
+    const moveOnClickHandler = () => {
+        alert("수정하기 페이지로 이동합니다!")
+        router.push(`/boards/detail/${router.query.id}/edit`)
+    }
+
+    const moveListHandler = () => {
+        alert("목록으로 이동합니다.")
+        router.push(`/boards`)
+    }
+
     return (
-        <BoardDetailUI data={data} deleteClickHandler={deleteClickHandler} />
+        <BoardDetailUI
+            data={data}
+            deleteClickHandler={deleteClickHandler}
+            moveOnClickHandler={moveOnClickHandler}
+            moveListHandler={moveListHandler}
+        />
     )
 }
 
