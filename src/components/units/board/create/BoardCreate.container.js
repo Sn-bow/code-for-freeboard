@@ -20,9 +20,11 @@ const BoardCreate = ({ isEdit }) => {
     const [titleError, setTitleError] = useState('')
     const [contentError, setContentError] = useState('')
 
-    // mutation & router
+    // mutation
     const [board] = useMutation(CREATE_BOARD)
     const [updateBoard] = useMutation(UPDATE_BOARD)
+
+    // router
     const router = useRouter()
 
     // query
@@ -91,38 +93,25 @@ const BoardCreate = ({ isEdit }) => {
 
     // onClickUpdate Handler
     const onClickUpdate = async () => {
-        if (user && password && title && content) {
-            try {
-                const update = await updateBoard({
-                    variables: {
-                        updateBoardInput: {
-                            title: title,
-                            contents: content
-                        },
-                        password: password,
-                        boardId: router.query.id
-                    }
-                })
-                alert("수정에 성공하셨습니다.")
-                router.push(`/boards/detail/${update.data.updateBoard._id}`)
-            } catch (error) {
-                console.log(error)
-                console.error(error)
-                alert(error)
+        try {
+            // 수정하기 값 유지 코드
+            const myvariables = {
+                updateBoardInput: {},
+                password: password,
+                boardId: router.query.id
             }
-        }
-        // error 실행 조건문
-        if (!user) {
-            setUserError("작성자를 적어주세요!")
-        }
-        if (!password) {
-            setPasswordError("패스워드를 적어주세요!")
-        }
-        if (!title) {
-            setTitleError("제목을 적어주세요!")
-        }
-        if (!content) {
-            setContentError("내용을 적어주세요!")
+            if (title) myvariables.updateBoardInput.title = title
+            if (content) myvariables.updateBoardInput.contents = content
+
+            const update = await updateBoard({
+                variables: myvariables
+            })
+            alert("수정에 성공하셨습니다.")
+            router.push(`/boards/detail/${update.data.updateBoard._id}`)
+        } catch (error) {
+            console.log(error)
+            console.error(error)
+            alert(error)
         }
     }
 
@@ -139,10 +128,6 @@ const BoardCreate = ({ isEdit }) => {
             passwordError={passwordError}
             titleError={titleError}
             contentError={contentError}
-            user={user}
-            password={password}
-            title={title}
-            content={content}
             onClickUpdate={onClickUpdate}
             isEdit={isEdit}
             cancleHandler={cancleHandler}

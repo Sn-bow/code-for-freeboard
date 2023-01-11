@@ -1,10 +1,10 @@
 import BoardCreate from '../../../src/components/units/board/create/BoardCreate.container'
 
-const EmotionSection = () => {
+const CreatePage = () => {
 
     return (
         <BoardCreate isEdit={true} />
     )
 }
 
-export default EmotionSection
+export default CreatePage
