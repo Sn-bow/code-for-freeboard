@@ -3,14 +3,14 @@ import { FETCH_BOARD, DELETE_BOARD } from './BoardDetail.mutation'
 import { useQuery, useMutation } from '@apollo/client'
 import BoardDetailUI from './BoardDetail.presenter'
 import { MouseEventHandler } from 'react'
-import { IMutation, IQuery } from '../../../../commons/types/generated/types'
+import { IMutation, IQuery, IQueryFetchBoardArgs } from '../../../../commons/types/generated/types'
 import { IEventType } from './BoardDetail.type'
 
 const BoardDetail = () => {
 
     const router = useRouter()
 
-    const { data } = useQuery<Pick<IQuery, "fetchBoard">>(FETCH_BOARD, {
+    const { data } = useQuery<Pick<IQuery, "fetchBoard">, IQueryFetchBoardArgs>(FETCH_BOARD, {
         variables: {
             boardId: router.query.id
         }
@@ -18,6 +18,7 @@ const BoardDetail = () => {
 
     const [deleteBoard] = useMutation<Pick<IMutation, "deleteBoard">>(DELETE_BOARD)
 
+    // type any 수정해야함
     const deleteClickHandler = async (e: any) => {
         try {
             await deleteBoard({

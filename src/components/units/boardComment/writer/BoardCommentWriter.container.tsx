@@ -5,6 +5,7 @@ import { CREATE_BOARD_COMMENT } from './BoardCommentWrite.graphql'
 import { ICreateBoardComment } from './BoardCommentWriter.type'
 import BoardCommentWriterUI from './BoardCommentWriter.presenter'
 import { FETCH_BOARD_COMMENTS } from '../list/BoardCommentList.graphql'
+import { IMutation, IMutationCreateBoardCommentArgs } from '../../../../commons/types/generated/types'
 
 
 const BoardCommentWriter = () => {
@@ -12,7 +13,7 @@ const BoardCommentWriter = () => {
     const [password, setPassword] = useState('')
     const [contents, setContents] = useState('')
 
-    const [createBoardComment] = useMutation(CREATE_BOARD_COMMENT)
+    const [createBoardComment] = useMutation<Pick<IMutation, "createBoardComment">, IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT)
 
     const router = useRouter()
 
@@ -20,7 +21,7 @@ const BoardCommentWriter = () => {
         try {
             if (contents.length <= 100) {
                 const myvariables: ICreateBoardComment = {
-                    boardId: router.query.id,
+                    boardId: String(router.query.id),
                     createBoardCommentInput: {
                         writer: user,
                         password: password,
@@ -28,14 +29,15 @@ const BoardCommentWriter = () => {
                         rating: 4
                     }
                 }
-
                 //refetchQueries: { query: FETCH_BOARD_COMMENTS, variables: { boardId: router.query.id } }
                 await createBoardComment({
                     variables: myvariables,
-                    refetchQueries: {
-                        query: FETCH_BOARD_COMMENTS,
-                        variables: { boardId: router.query.id }
-                    }
+                    refetchQueries: [
+                        {
+                            query: FETCH_BOARD_COMMENTS,
+                            variables: { boardId: router.query.id }
+                        }
+                    ]
                 })
                 alert("댓글달기 성공")
                 setUser("")
@@ -43,9 +45,11 @@ const BoardCommentWriter = () => {
                 setContents("")
             }
         } catch (error) {
-            console.log(error)
-            console.error(error)
-            alert(error)
+            if (error instanceof Error) {
+                console.log(error.message)
+                console.error(error.message)
+                alert(error.message)
+            }
         }
     }
 

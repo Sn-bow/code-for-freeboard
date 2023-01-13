@@ -4,6 +4,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from './BoardCreate.mutation'
 import BoardCreateUI from './BoardCreate.presenter'
 import { IBoardCreateProps, IBoardCreateValueState, IMyvariables } from './BoardCreate.type'
+import { IMutation, IMutationCreateBoardArgs, IMutationUpdateBoardArgs } from '../../../../commons/types/generated/types'
 
 
 
@@ -25,8 +26,8 @@ const BoardCreate = (props: IBoardCreateProps) => {
     const [contentError, setContentError] = useState('')
 
     // mutation
-    const [board] = useMutation(CREATE_BOARD)
-    const [updateBoard] = useMutation(UPDATE_BOARD)
+    const [board] = useMutation<Pick<IMutation, "createBoard">, IMutationCreateBoardArgs>(CREATE_BOARD)
+    const [updateBoard] = useMutation<Pick<IMutation, "updateBoard">, IMutationUpdateBoardArgs>(UPDATE_BOARD)
 
     // router
     const router = useRouter()
@@ -90,7 +91,7 @@ const BoardCreate = (props: IBoardCreateProps) => {
                         }
                     }
                 })
-                router.push(`/boards/detail/${result.data.createBoard._id}`)
+                router.push(`/boards/detail/${result?.data?.createBoard._id}`)
                 alert("등록에 성공하셨습니다!")
             } catch (error) {
                 console.log(error)
@@ -131,7 +132,7 @@ const BoardCreate = (props: IBoardCreateProps) => {
                 variables: myvariables
             })
             alert("수정에 성공하셨습니다.")
-            router.push(`/boards/detail/${update.data.updateBoard._id}`)
+            router.push(`/boards/detail/${update.data?.updateBoard._id}`)
         } catch (error) {
             console.log(error)
             console.error(error)

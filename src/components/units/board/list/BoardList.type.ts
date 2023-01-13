@@ -3,6 +3,6 @@ import { MouseEvent } from 'react';
 
 export interface IBoardListUIType {
     data?: Pick<IQuery, "fetchBoards">,
-    onClickMoveToBoardDetail: any,
+    onClickMoveToBoardDetail: (e: MouseEvent<HTMLDivElement>) => void,
     onClickMoveToBoardNew: () => void
 }

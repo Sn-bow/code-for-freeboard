@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 
 export interface ICreateBoardComment {
   createBoardCommentInput: ICreateBoardCommentInput;
-  boardId: string | string[] | undefined;
+  boardId: string
 }
 
 export interface ICreateBoardCommentInput {
