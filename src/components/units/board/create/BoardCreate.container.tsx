@@ -85,13 +85,14 @@ const BoardCreate = (props: IBoardCreateProps) => {
                     variables: {
                         createBoardInput: {
                             writer: user,
-                            password: password,
-                            title: title,
+                            password,
+                            title,
                             contents: content
                         }
                     }
                 })
-                router.push(`/boards/detail/${result?.data?.createBoard._id}`)
+
+                router.push(`/boards/detail/${result.data?.createBoard._id}`)
                 alert("등록에 성공하셨습니다!")
             } catch (error) {
                 console.log(error)
@@ -122,8 +123,8 @@ const BoardCreate = (props: IBoardCreateProps) => {
             // 수정하기 값 유지 코드
             const myvariables: IMyvariables = {
                 updateBoardInput: {},
-                password: password,
-                boardId: router.query.id
+                password,
+                boardId: String(router.query.id)
             }
             if (title) myvariables.updateBoardInput.title = title
             if (content) myvariables.updateBoardInput.contents = content

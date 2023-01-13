@@ -4,7 +4,7 @@ import { IBoardDetailUIProps } from './BoardDetail.type';
 
 
 const BoardDetailUI = (props: IBoardDetailUIProps) => {
-    const { data, deleteClickHandler, moveOnClickHandler, moveListHandler } = props
+    const { data, deleteClickHandler, moveOnClickHandler, moveListHandler, likeUpHandler, dislikeUpHandler } = props
     return (
         <>
             <MainContain>
@@ -15,8 +15,8 @@ const BoardDetailUI = (props: IBoardDetailUIProps) => {
                                 <UserImage />
                             </UserImageBox>
                             <UserDataBox>
-                                <UserId>{data && data.fetchBoard.writer}</UserId>
-                                <CreateDate>{data && data.fetchBoard.createdAt}</CreateDate>
+                                <UserId>{data?.fetchBoard.writer}</UserId>
+                                <CreateDate>{data?.fetchBoard.createdAt}</CreateDate>
                             </UserDataBox>
                         </UserBoxContents>
                         <ShareAndMapPinBox>
@@ -25,13 +25,13 @@ const BoardDetailUI = (props: IBoardDetailUIProps) => {
                         </ShareAndMapPinBox>
                     </UserBox>
                     <ContentsBox>
-                        <ContentsTitle>{data && data.fetchBoard.title}</ContentsTitle>
+                        <ContentsTitle>{data?.fetchBoard.title}</ContentsTitle>
                         <ContentsImageBox>
                             <ContentsImage src='https://cdn.pixabay.com/photo/2022/11/28/00/42/man-7620937_640.jpg' />
                         </ContentsImageBox>
                         <ContentsTextBox>
                             <ContentsText>
-                                {data && data.fetchBoard.contents}
+                                {data?.fetchBoard.contents}
                             </ContentsText>
                         </ContentsTextBox>
                         <ContentsYoutubeBox>
@@ -40,19 +40,19 @@ const BoardDetailUI = (props: IBoardDetailUIProps) => {
                     </ContentsBox>
                     <LikeAndUnLikeBox>
                         <LikeBox>
-                            <Like />
-                            <LikeCount>{data && data.fetchBoard.likeCount}</LikeCount>
+                            <Like onClick={likeUpHandler} />
+                            <LikeCount>{data?.fetchBoard.likeCount}</LikeCount>
                         </LikeBox>
                         <UnLikeBox>
-                            <UnLike />
-                            <UnLikeCount>{data && data.fetchBoard.dislikeCount}</UnLikeCount>
+                            <UnLike onClick={dislikeUpHandler} />
+                            <UnLikeCount>{data?.fetchBoard.dislikeCount}</UnLikeCount>
                         </UnLikeBox>
                     </LikeAndUnLikeBox>
                 </MainBox>
                 <ButtonBox>
                     <ListMoveButton onClick={moveListHandler}>목록으로</ListMoveButton>
                     <AmendMoveButton onClick={moveOnClickHandler}>수정하기</AmendMoveButton>
-                    <DeleteMoveButton id={data && data.fetchBoard._id} onClick={deleteClickHandler}>삭제하기</DeleteMoveButton>
+                    <DeleteMoveButton id={data?.fetchBoard._id} onClick={deleteClickHandler}>삭제하기</DeleteMoveButton>
                 </ButtonBox>
             </MainContain>
         </>

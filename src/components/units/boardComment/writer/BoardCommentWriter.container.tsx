@@ -8,10 +8,13 @@ import { FETCH_BOARD_COMMENTS } from '../list/BoardCommentList.graphql'
 import { IMutation, IMutationCreateBoardCommentArgs } from '../../../../commons/types/generated/types'
 
 
+
+
 const BoardCommentWriter = () => {
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
     const [contents, setContents] = useState('')
+
 
     const [createBoardComment] = useMutation<Pick<IMutation, "createBoardComment">, IMutationCreateBoardCommentArgs>(CREATE_BOARD_COMMENT)
 
@@ -24,12 +27,12 @@ const BoardCommentWriter = () => {
                     boardId: String(router.query.id),
                     createBoardCommentInput: {
                         writer: user,
-                        password: password,
-                        contents: contents,
-                        rating: 4
+                        password,
+                        contents,
+                        rating: starCount
                     }
                 }
-                //refetchQueries: { query: FETCH_BOARD_COMMENTS, variables: { boardId: router.query.id } }
+                // refetchQueries: { query: FETCH_BOARD_COMMENTS, variables: { boardId: router.query.id } }
                 await createBoardComment({
                     variables: myvariables,
                     refetchQueries: [
@@ -64,6 +67,13 @@ const BoardCommentWriter = () => {
     }
 
 
+    const [starCount, setStarCount] = useState(0)
+
+    const starCountHandler = (num: number) => {
+        setStarCount(num)
+    }
+
+
     return (
         <BoardCommentWriterUI
             user={user}
@@ -73,6 +83,7 @@ const BoardCommentWriter = () => {
             contents={contents}
             contentsChangeHandler={contentsChangeHandler}
             ConfirmHandler={ConfirmHandler}
+            starCountHandler={starCountHandler}
         />
     )
 }

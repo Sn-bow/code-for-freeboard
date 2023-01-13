@@ -2,6 +2,7 @@ import { MouseEvent } from 'react'
 import { getDate } from '../../../commons/libraries/utils'
 import * as S from './BoardCommentList.style'
 import { IBoardCommentElementType, IBoardCommentListProps } from './BoardCommentList.type'
+import { Rate } from 'antd'
 
 const BoardCommentListUI = (props: IBoardCommentListProps) => {
     const { data } = props
@@ -36,7 +37,7 @@ const BoardCommentListUI = (props: IBoardCommentListProps) => {
                                 <S.CommentUserBox onClick={zzz}>
                                     <S.UserStarBox>
                                         <S.UserName>{el.writer}</S.UserName>
-                                        <S.Star>{el.rating}</S.Star>
+                                        <S.Star><Rate defaultValue={el.rating} /></S.Star>
                                     </S.UserStarBox>
                                     <S.CommentEditBox>
                                         <S.PencilIconImg src='/images/boardComment/list/pencil.png' alt='pencilIcon' />

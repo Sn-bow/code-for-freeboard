@@ -1,5 +1,6 @@
 import * as S from './BoardCommentWriter.styles'
 import { IBoardCommentWriterUIPropsType } from './BoardCommentWriter.type'
+import { Rate } from 'antd'
 
 const BoardCommentWriterUI = (props: IBoardCommentWriterUIPropsType) => {
     const {
@@ -9,7 +10,8 @@ const BoardCommentWriterUI = (props: IBoardCommentWriterUIPropsType) => {
         userChangeHandler,
         passwordChangeHandler,
         contentsChangeHandler,
-        ConfirmHandler
+        ConfirmHandler,
+        starCountHandler
     } = props
 
 
@@ -27,7 +29,7 @@ const BoardCommentWriterUI = (props: IBoardCommentWriterUIPropsType) => {
                     <S.PasswordInput value={password} type='password' placeholder='비밀번호' onChange={passwordChangeHandler} />
                 </S.PasswordInputBox>
                 <S.StarBox>
-                    밤하늘의 스타 이 올 자리
+                    <Rate count={5} onChange={(number) => { starCountHandler(number); }} />
                 </S.StarBox>
             </S.UserBox>
             <S.WriterBox>

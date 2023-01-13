@@ -1,5 +1,7 @@
-import { Maybe } from 'graphql/jsutils/Maybe';
-import { IBoardComment, IQuery } from '../../../../commons/types/generated/types';
+import {
+  IBoardComment,
+  IQuery,
+} from "../../../../commons/types/generated/types";
 
 export interface IFetchBoardCommentsEL {
   _id: string;
@@ -10,7 +12,7 @@ export interface IFetchBoardCommentsEL {
 }
 
 export interface IBoardCommentListProps {
-  data?: Pick<IQuery, "fetchBoardComments">
+  data?: Pick<IQuery, "fetchBoardComments">;
 }
 
-export type IBoardCommentElementType = Partial<IBoardComment>
+export type IBoardCommentElementType = Partial<IBoardComment>;

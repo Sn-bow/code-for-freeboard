@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 
 export interface ICreateBoardComment {
   createBoardCommentInput: ICreateBoardCommentInput;
-  boardId: string
+  boardId: string;
 }
 
 export interface ICreateBoardCommentInput {
@@ -20,4 +20,5 @@ export interface IBoardCommentWriterUIPropsType {
   passwordChangeHandler: (e: ChangeEvent<HTMLInputElement>) => void;
   contentsChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   ConfirmHandler: () => void;
+  starCountHandler: (num: number) => void;
 }

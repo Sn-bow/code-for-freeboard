@@ -14,14 +14,11 @@ export default function BoardList() {
   };
 
   const onClickMoveToBoardDetail = (event: MouseEvent<HTMLDivElement>) => {
-    router.push(`/boards/detail/${event.target.id}`);
+    router.push(`/boards/detail/${event.currentTarget.id}`);
   };
 
   return (
-    <BoardListUI
-      data={data}
-      onClickMoveToBoardNew={onClickMoveToBoardNew}
-      onClickMoveToBoardDetail={onClickMoveToBoardDetail}
+    <BoardListUI data={data} onClickMoveToBoardNew={onClickMoveToBoardNew} onClickMoveToBoardDetail={onClickMoveToBoardDetail}
     />
   );
 }
