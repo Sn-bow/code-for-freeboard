@@ -2,20 +2,23 @@ import { useRouter } from 'next/router'
 import { FETCH_BOARD, DELETE_BOARD } from './BoardDetail.mutation'
 import { useQuery, useMutation } from '@apollo/client'
 import BoardDetailUI from './BoardDetail.presenter'
+import { MouseEventHandler } from 'react'
+import { IMutation, IQuery } from '../../../../commons/types/generated/types'
+import { IEventType } from './BoardDetail.type'
 
 const BoardDetail = () => {
 
     const router = useRouter()
 
-    const { data } = useQuery(FETCH_BOARD, {
+    const { data } = useQuery<Pick<IQuery, "fetchBoard">>(FETCH_BOARD, {
         variables: {
             boardId: router.query.id
         }
     })
 
-    const [deleteBoard] = useMutation(DELETE_BOARD)
+    const [deleteBoard] = useMutation<Pick<IMutation, "deleteBoard">>(DELETE_BOARD)
 
-    const deleteClickHandler = async (e) => {
+    const deleteClickHandler = async (e: any) => {
         try {
             await deleteBoard({
                 variables: {
@@ -25,9 +28,9 @@ const BoardDetail = () => {
             alert("성공적으로 삭제 되었습니다.")
             router.push(`/boards`)
         } catch (error) {
-            console.error(error.message)
-            console.log(error.message)
-            alert(error.message)
+            console.error(error)
+            console.log(error)
+            alert(error)
         }
 
     }

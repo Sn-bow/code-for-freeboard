@@ -1,6 +1,10 @@
 import { ProductDetailStyled } from './BoardDetail.style'
+import { IBoardDetailUIProps } from './BoardDetail.type';
 
-const BoardDetailUI = ({ data, deleteClickHandler, moveOnClickHandler, moveListHandler }) => {
+
+
+const BoardDetailUI = (props: IBoardDetailUIProps) => {
+    const { data, deleteClickHandler, moveOnClickHandler, moveListHandler } = props
     return (
         <>
             <MainContain>
@@ -12,7 +16,7 @@ const BoardDetailUI = ({ data, deleteClickHandler, moveOnClickHandler, moveListH
                             </UserImageBox>
                             <UserDataBox>
                                 <UserId>{data && data.fetchBoard.writer}</UserId>
-                                <CreateDate>{data && data.fetchBoard.CreateDate}</CreateDate>
+                                <CreateDate>{data && data.fetchBoard.createdAt}</CreateDate>
                             </UserDataBox>
                         </UserBoxContents>
                         <ShareAndMapPinBox>

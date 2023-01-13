@@ -6,8 +6,6 @@ export const Contain = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
 `;
 
 export const ContainBox = styled.div`

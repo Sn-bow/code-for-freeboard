@@ -1,6 +1,7 @@
 import * as S from '../../../../../styles/emotion'
+import { IBoardCreateUI } from './BoardCreate.type'
 
-const BoardCreateUI = (props) => {
+const BoardCreateUI = (props: IBoardCreateUI) => {
     const {
         boardStateChangeHandler,
         onClickSubmit,
@@ -15,7 +16,8 @@ const BoardCreateUI = (props) => {
         onClickUpdate,
         isEdit,
         cancleHandler,
-        data
+        data,
+        tesxtAreaStateChangeHandler
     } = props
 
     return (
@@ -63,10 +65,10 @@ const BoardCreateUI = (props) => {
                     <S.ContentLabel htmlFor="content">내용</S.ContentLabel>
                     <S.ContentInput
                         name='content'
-                        defaultValue={isEdit ? content : data?.fetchBoard.contents} type="text"
+                        defaultValue={isEdit ? content : data?.fetchBoard.contents}
                         id="content"
                         placeholder='내용을 작성해주세요'
-                        onChange={boardStateChangeHandler}
+                        onChange={tesxtAreaStateChangeHandler}
                     />
                     <S.ErrorMessage>{contentError}</S.ErrorMessage>
                 </S.ContentBox>

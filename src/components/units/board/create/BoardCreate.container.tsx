@@ -1,18 +1,22 @@
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { useRouter } from 'next/router'
 import { useMutation, useQuery } from '@apollo/client'
 import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from './BoardCreate.mutation'
 import BoardCreateUI from './BoardCreate.presenter'
+import { IBoardCreateProps, IBoardCreateValueState, IMyvariables } from './BoardCreate.type'
 
-const BoardCreate = ({ isEdit }) => {
+
+
+const BoardCreate = (props: IBoardCreateProps) => {
+    const { isEdit } = props
     // change state
-    const [boardValueState, setBoardValueState] = useState({
+    const [boardValueState, setBoardValueState] = useState<IBoardCreateValueState>({
         user: '',
         password: '',
         title: '',
         content: '',
     })
-    const { user, password, title, content } = boardValueState
+    const { user, password, title, content }: IBoardCreateValueState = boardValueState
 
     // error state
     const [userError, setUserError] = useState('')
@@ -35,7 +39,25 @@ const BoardCreate = ({ isEdit }) => {
     })
 
     // changeHandler & errorHandler
-    const boardStateChangeHandler = (e) => {
+    const boardStateChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        const boardState = { ...boardValueState }
+        boardState[e.target.name] = e.target.value
+        setBoardValueState(boardState)
+        // error 초기화 조건문
+        if (boardState.user) {
+            setUserError("")
+        }
+        if (boardState.password) {
+            setPasswordError("")
+        }
+        if (boardState.title) {
+            setTitleError("")
+        }
+        if (boardState.content) {
+            setContentError("")
+        }
+    }
+    const tesxtAreaStateChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const boardState = { ...boardValueState }
         boardState[e.target.name] = e.target.value
         setBoardValueState(boardState)
@@ -91,11 +113,13 @@ const BoardCreate = ({ isEdit }) => {
         }
     }
 
+
+
     // onClickUpdate Handler
     const onClickUpdate = async () => {
         try {
             // 수정하기 값 유지 코드
-            const myvariables = {
+            const myvariables: IMyvariables = {
                 updateBoardInput: {},
                 password: password,
                 boardId: router.query.id
@@ -132,6 +156,7 @@ const BoardCreate = ({ isEdit }) => {
             isEdit={isEdit}
             cancleHandler={cancleHandler}
             data={data}
+            tesxtAreaStateChangeHandler={tesxtAreaStateChangeHandler}
         />
     )
 }
