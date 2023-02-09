@@ -11,7 +11,7 @@ module.exports = {
   overrides: [
   ],
   parserOptions: {
-    project: './freeboard_frontend/tsconfig.json',
+    project: '**/tsconfig.json',
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
@@ -24,6 +24,7 @@ module.exports = {
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
-    "@typescript-eslint/no-misused-promises": "off"
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/triple-slash-reference": "off"
   }
 }

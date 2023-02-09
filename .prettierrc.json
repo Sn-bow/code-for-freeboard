@@ -1,4 +1,13 @@
 {
-    "tabWidth": 2,
-    "jsxBracketSameLine": true
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": false,
+    "jsxSingleQuote": false,
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "arrowParens": "always",
+    "filepath": "string",
+    "proseWrap": "always",
+    "singleAttributePerLine": true
 }
