@@ -54,7 +54,8 @@ const BoardCreateUI = (props: IBoardCreateUI) => {
                     <S.TitleLabel htmlFor="title">제목</S.TitleLabel>
                     <S.TitleInput
                         name='title'
-                        defaultValue={isEdit ? title : data?.fetchBoard.title} type="text"
+                        defaultValue={isEdit ? title : data?.fetchBoard.title}
+                        type="text"
                         id="title"
                         placeholder='제목을 작성해주세요'
                         onChange={boardStateChangeHandler}
@@ -75,10 +76,16 @@ const BoardCreateUI = (props: IBoardCreateUI) => {
                 <S.AddressBox>
                     <S.AddressSpan>주소</S.AddressSpan>
                     <S.AddressSection>
-                        <S.AddressInput type="text" placeholder="07250" />
+                        <S.AddressInput
+                            type="text" placeholder="07250"
+                            readOnly
+                        />
                         <S.AddressButton>우편번호 검색</S.AddressButton>
                     </S.AddressSection>
-                    <S.AddressConsole type="text" />
+                    <S.AddressConsole
+                        type="text"
+                        readOnly
+                    />
                     <S.AddressConsole type="text" />
                 </S.AddressBox>
                 <S.YoutubeBox>
