@@ -1,4 +1,5 @@
 import { getDate } from "../../../commons/libraries/utils";
+import PagiNation from '../../../commons/pagiNation/PagiNation';
 import * as S from "./BoardList.styles";
 import { IBoardListUIType } from './BoardList.type';
 
@@ -26,6 +27,13 @@ export default function BoardListUI(props: IBoardListUIType) {
           </S.Row>
         ))}
         <S.TableBottom />
+        <PagiNation
+          pageRefetchHandler={props.pageRefetchHandler}
+          pagiCount={props.pagiCount}
+          nextPagiHandler={props.nextPagiHandler}
+          prevPagiHandler={props.prevPagiHandler}
+          lastPage={props.lastPage}
+        />
         <S.Footer>
           <S.Button onClick={props.onClickMoveToBoardNew}>
             <S.PencilIcon src="/images/board/list/write.png" />
