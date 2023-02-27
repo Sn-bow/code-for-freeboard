@@ -1,18 +1,19 @@
 import {
-  IBoardComment,
-  IQuery,
-} from "../../../../commons/types/generated/types";
+    IBoardComment,
+    IQuery,
+} from "../../../../commons/types/generated/types"
 
 export interface IFetchBoardCommentsEL {
-  _id: string;
-  writer: string;
-  contents: string;
-  rating: number;
-  createdAt: string | Date;
+    _id: string
+    writer: string
+    contents: string
+    rating: number
+    createdAt: string | Date
 }
 
 export interface IBoardCommentListProps {
-  data?: Pick<IQuery, "fetchBoardComments">;
+    data?: Pick<IQuery, "fetchBoardComments">
+    onLoadMore: () => void
 }
 
-export type IBoardCommentElementType = Partial<IBoardComment>;
+export type IBoardCommentElementType = Partial<IBoardComment>

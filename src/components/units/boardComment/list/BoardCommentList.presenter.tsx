@@ -1,11 +1,10 @@
 import { MouseEvent } from 'react'
-import { getDate } from '../../../commons/libraries/utils'
-import * as S from './BoardCommentList.style'
 import { IBoardCommentElementType, IBoardCommentListProps } from './BoardCommentList.type'
-import { Rate } from 'antd'
+import InfiniteScroll from 'react-infinite-scroller'
+import CommentListItem from './BoardCommentList.item'
 
 const BoardCommentListUI = (props: IBoardCommentListProps) => {
-    const { data } = props
+    const { data, onLoadMore } = props
 
 
     // 이벤트 버블링 해결법으로 currentTarget을 이용해서 onClick 이 가리키고있는 타겟을 선택하여 해결할 수있다.
@@ -24,39 +23,22 @@ const BoardCommentListUI = (props: IBoardCommentListProps) => {
 
 
 
+
+
     return (
-        <>
+        <InfiniteScroll pageStart={0} loadMore={onLoadMore} hasMore={true}>
             {data?.fetchBoardComments.map((el: IBoardCommentElementType) => {
                 return (
-                    <S.Contain id={String(el.writer)} key={el._id} onClick={alertEventHandler}>
-                        <S.CommentContain>
-                            <S.UserImgBox>
-                                <S.UserImg src='/images/common/userImg.png' alt='userIconImg' />
-                            </S.UserImgBox>
-                            <S.CommentBox>
-                                <S.CommentUserBox onClick={zzz}>
-                                    <S.UserStarBox>
-                                        <S.UserName>{el.writer}</S.UserName>
-                                        <S.Star><Rate defaultValue={el.rating} /></S.Star>
-                                    </S.UserStarBox>
-                                    <S.CommentEditBox>
-                                        <S.PencilIconImg src='/images/boardComment/list/pencil.png' alt='pencilIcon' />
-                                        <S.XIconImg src='/images/boardComment/list/x.png' alt='XIcon' />
-                                    </S.CommentEditBox>
-                                </S.CommentUserBox>
-                                <S.CommentContentsBox>
-                                    <S.Comment>{el.contents}</S.Comment>
-                                </S.CommentContentsBox>
-                            </S.CommentBox>
-                        </S.CommentContain>
-                        <S.CommentDateBox>
-                            <S.Date>{getDate(el.createdAt)}</S.Date>
-                        </S.CommentDateBox>
-                    </S.Contain>
+                    <CommentListItem
+                        key={el._id}
+                        el={el}
+                        alertEventHandler={alertEventHandler}
+                        zzz={zzz}
+                    />
                 )
             })
             }
-        </>
+        </InfiniteScroll>
     )
 }
 

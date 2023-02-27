@@ -15,11 +15,30 @@ const BoardCommentList = () => {
     //     return <></>
     // }
 
-    const { data } = useQuery<Pick<IQuery, "fetchBoardComments">, IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
+    const { data, fetchMore } = useQuery<Pick<IQuery, "fetchBoardComments">, IQueryFetchBoardCommentsArgs>(FETCH_BOARD_COMMENTS, {
         variables: {
             boardId: String(router.query.id)
         }
     })
+
+
+    const onLoadMore = () => {
+        if (data === undefined) return
+        fetchMore({
+            variables: { page: Math.ceil(data?.fetchBoardComments.length / 10) + 1 },
+            updateQuery: (prev, { fetchMoreResult }) => {
+                if (fetchMoreResult.fetchBoardComments === undefined) {
+                    return {
+                        fetchBoardComments: [...prev.fetchBoardComments]
+                    }
+                }
+                return {
+                    fetchBoardComments: [...prev.fetchBoardComments, ...fetchMoreResult.fetchBoardComments]
+                }
+            }
+        })
+    }
+
 
     // 삭제하기 기능 구현해보기
     // boardCommentId 에서 event.target.id 로 id값을 받아올 경우에 이벤트 버블링 효과가 나올 수 있다.
@@ -45,7 +64,9 @@ const BoardCommentList = () => {
 
     return (
         <BoardCommentListUI
-            data={data} />
+            data={data}
+            onLoadMore={onLoadMore}
+        />
     )
 }
 
