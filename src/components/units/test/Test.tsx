@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { ChangeEvent, useRef, useState } from 'react'
 import styled from '@emotion/styled'
 import { IMutation, IMutationCreateBoardArgs, IMutationUploadFileArgs } from '../../../commons/types/generated/types'
+import { imgValidation } from '../../commons/validation/ImgUpload'
 
 const CREATE_BOARD = gql`
     mutation createBoard($createBoardInput: CreateBoardInput!){
@@ -73,6 +74,10 @@ export default function QuizTest() {
 
     const imgChnageHandler = async (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0]
+        console.log(file?.type)
+
+        const checkImg = imgValidation(file)
+        if (!checkImg) return
 
         try {
             const result = await uploadFile({ variables: { file } })
