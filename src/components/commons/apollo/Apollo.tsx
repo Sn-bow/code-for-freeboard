@@ -5,6 +5,8 @@ interface IApolloSettingPropsType {
     children: JSX.Element
 }
 
+const APOLLO_CACHE = new InMemoryCache()
+
 const ApolloSetting = (props: IApolloSettingPropsType) => {
 
     const uploadLink = createUploadLink({
@@ -13,7 +15,7 @@ const ApolloSetting = (props: IApolloSettingPropsType) => {
 
     const client = new ApolloClient({
         link: ApolloLink.from([uploadLink]),
-        cache: new InMemoryCache()
+        cache: APOLLO_CACHE
     })
 
     return (
