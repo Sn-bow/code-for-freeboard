@@ -2,6 +2,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache, ApolloLink } from '@apollo
 import { createUploadLink } from 'apollo-upload-client'
 import { useRecoilState } from 'recoil'
 import { accessTokenState } from '../../../commons/store/recoil'
+import { withApollo } from '../hoc/withApollo'
 
 interface IApolloSettingPropsType {
     children: JSX.Element
@@ -29,4 +30,4 @@ const ApolloSetting = (props: IApolloSettingPropsType) => {
     )
 }
 
-export default ApolloSetting
+export default withApollo(ApolloSetting)
