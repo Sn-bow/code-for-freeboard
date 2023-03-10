@@ -2,7 +2,8 @@ import { ApolloProvider, ApolloClient, InMemoryCache, ApolloLink } from '@apollo
 import { createUploadLink } from 'apollo-upload-client'
 import { useRecoilState } from 'recoil'
 import { accessTokenState } from '../../../commons/store/recoil'
-import { withApollo } from '../hoc/withApollo'
+import { useApollo } from '../custom-hooks/useApollo'
+// import { withApollo } from '../hoc/withApollo'
 
 interface IApolloSettingPropsType {
     children: JSX.Element
@@ -11,6 +12,7 @@ interface IApolloSettingPropsType {
 const APOLLO_CACHE = new InMemoryCache()
 
 const ApolloSetting = (props: IApolloSettingPropsType) => {
+    useApollo()
     const [accessToken, setAccessToken] = useRecoilState(accessTokenState)
 
     const uploadLink = createUploadLink({
@@ -30,4 +32,4 @@ const ApolloSetting = (props: IApolloSettingPropsType) => {
     )
 }
 
-export default withApollo(ApolloSetting)
+export default ApolloSetting

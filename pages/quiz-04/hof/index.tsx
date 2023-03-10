@@ -1,7 +1,8 @@
+import { useAuth } from '../../../src/components/commons/custom-hooks/useAuth'
 
 
 const HofTest = () => {
-
+    useAuth()
     const onClickTest = (temp: string) => () => {
         console.log(temp)
     }
